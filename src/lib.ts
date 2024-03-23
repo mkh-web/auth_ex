@@ -2,12 +2,17 @@ import { SessionOptions } from "iron-session"//باستخدام iron session
 
 
 
-export interface SessionData {
+export interface SessionData {//تعريف تايب عشان تايب سكربت
     userid?: string,
     username?: string,
     img?: string
-    isPro?: Boolean
+    isPro?: Boolean,
+    isLoggedIn:boolean
 }
+
+export const defaultSession:SessionData={
+    isLoggedIn:false
+} 
 
 export const sessionOptions: SessionOptions = {//متطلبات السيشن 
     password: process.env.SEACRT_KEY!,
@@ -15,5 +20,6 @@ export const sessionOptions: SessionOptions = {//متطلبات السيشن
     cookieOptions:{
         httpOnly:true,//ما يخليهم يدخلون بالجافا سكربت للكوكيز
         secure: process.env.NODE_ENV === "production"
+
     }
 }

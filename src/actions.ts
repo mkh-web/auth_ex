@@ -6,8 +6,9 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 
 let username = "mohnd"
-let isPro = true
 let password = "100"
+let isPro = true
+let isblocked = true
 
 
 export const getSession = async () => {
@@ -16,6 +17,9 @@ export const getSession = async () => {
     if (!session.isLoggedIn) {//الغرض من هذا الكود هو اني ادخل قيمة الفولس للمتغير لما ما يكون مسجل
         session.isLoggedIn = defaultSession.isLoggedIn
     }
+
+    session.isblocked = isblocked//ممكن تستخدمهم عشان تحقق
+    session.isPro = isPro
 
     return session
 }
@@ -62,6 +66,16 @@ export const logout = async () => {
 
     isPro = !seesion.isPro
     seesion.isPro = isPro
+    await seesion.save()
+    revalidatePath("/Profile")
+ }
+ export const changeUsername = async (fromData:FormData)=>{
+    const seesion = await getSession()
+
+    const newUSername = fromData.get("username") as string//form.get يستخدم عشان تسحب البيانات من الفورم حقك
+
+    username = newUSername
+    seesion.username = username
     await seesion.save()
     revalidatePath("/Profile")
  }

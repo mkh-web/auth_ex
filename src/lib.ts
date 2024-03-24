@@ -7,11 +7,13 @@ export interface SessionData {//تعريف تايب عشان تايب سكربت
     username?: string,
     img?: string
     isPro?: Boolean,
-    isLoggedIn:boolean
+    isLoggedIn:boolean,
+    isblocked:boolean
 }
 
 export const defaultSession:SessionData={
-    isLoggedIn:false
+    isLoggedIn: false,
+    isblocked: false
 } 
 
 export const sessionOptions: SessionOptions = {//متطلبات السيشن 

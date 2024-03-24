@@ -1,4 +1,4 @@
-import { changePremium, getSession } from "@/actions";
+import { changePremium, changeUsername, getSession } from "@/actions";
 import { redirect } from "next/navigation";
 
 
@@ -23,6 +23,11 @@ export default async function ProfilePage() {
                     <button>{session.isPro ? ("cancel"):("buy")} premium</button>
                 </form>
             </div>
+
+            <form action={changeUsername}>
+                <input type="text" name="username" required placeholder={session.username} />
+                <button>update</button>
+            </form>
         </>
     );
 }
